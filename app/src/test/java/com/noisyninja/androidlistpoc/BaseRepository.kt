@@ -1,7 +1,6 @@
 package com.noisyninja.androidlistpoc
 
 import android.arch.persistence.room.Room
-import com.google.gson.Gson
 import com.noisyninja.androidlistpoc.layers.database.DatabaseDao
 import com.noisyninja.androidlistpoc.layers.database.IDatabase
 import com.noisyninja.androidlistpoc.model.MeResponse
@@ -9,8 +8,6 @@ import io.reactivex.android.plugins.RxAndroidPlugins
 import io.reactivex.observers.TestObserver
 import io.reactivex.plugins.RxJavaPlugins
 import io.reactivex.schedulers.Schedulers
-import io.reactivex.subscribers.TestSubscriber
-import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
 import java.util.*
 
@@ -35,7 +32,7 @@ open class BaseRepository : BaseUnit() {
         // to mock response too
         // mMockWebServer.enqueue(MockResponse().setBody(Gson().toJson(meResponse)))
 
-        iDatabase = Room.inMemoryDatabaseBuilder(context, IDatabase::class.java).build()
+        iDatabase = Room.inMemoryDatabaseBuilder(context, IDatabase::class.java).allowMainThreadQueries().build()
         databaseDao = iDatabase.databaseDao()
     }
 

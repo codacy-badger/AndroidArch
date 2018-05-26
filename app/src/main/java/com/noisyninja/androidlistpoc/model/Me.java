@@ -13,7 +13,11 @@ import com.google.gson.annotations.SerializedName;
 @Entity(tableName = "me")
 public class Me {
 
-    @PrimaryKey()
+    @PrimaryKey(autoGenerate = true)
+    @Expose
+    @ColumnInfo(name = "userId")
+    private int userId;
+
     @NonNull
     @TypeConverters(DataConverter.class)
     @SerializedName("name")
@@ -36,8 +40,7 @@ public class Me {
         return name;
     }
 
-    @NonNull
-    public void setName(Name name) {
+    public void setName(@NonNull Name name) {
         this.name = name;
     }
 
@@ -49,8 +52,12 @@ public class Me {
         this.picture = picture;
     }
 
-    public String getWeek() {
-        return DayOfWeek.values()[page % 7].toString();
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public int getPage() {

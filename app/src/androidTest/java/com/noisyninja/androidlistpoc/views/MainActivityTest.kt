@@ -23,8 +23,6 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.Matchers
-import org.mockito.Mockito.verify
 
 /**
  * Created by sudiptadutta on 18/05/18.

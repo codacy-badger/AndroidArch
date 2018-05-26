@@ -40,7 +40,7 @@ class DataBaseModuleTest : BaseRepository() {
         tearDownRepository()
         tearDownLoopers()
     }
-
+/*
     @Test
     fun getNotifications_IfNotificationsInserted_ReturnsAListOfNotifications() {
 
@@ -52,7 +52,7 @@ class DataBaseModuleTest : BaseRepository() {
             assertEquals(meList?.size, 1)
         }
     }
-
+*/
     /*private fun createTestNotification(id: Int): Notification {
         //method omitted for brevity
     }*/

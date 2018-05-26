@@ -6,11 +6,6 @@ import com.noisyninja.androidlistpoc.NinjaApp
 import com.noisyninja.androidlistpoc.layers.AppExecutors
 import com.noisyninja.androidlistpoc.layers.RefWatcherModule
 import com.noisyninja.androidlistpoc.layers.UtilModule
-import com.noisyninja.androidlistpoc.layers.database.DataBaseModule
-import com.noisyninja.androidlistpoc.layers.database.viewmodel.ViewModelFactory
-import com.noisyninja.androidlistpoc.layers.network.HttpClient
-import com.noisyninja.androidlistpoc.layers.network.NetworkModule
-import com.squareup.leakcanary.RefWatcher
 import dagger.Module
 import dagger.Provides
 import java.util.concurrent.Executor

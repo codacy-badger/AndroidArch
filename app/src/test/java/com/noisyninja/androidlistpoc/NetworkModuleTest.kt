@@ -1,23 +1,15 @@
 package com.noisyninja.androidlistpoc
 
-import com.google.gson.Gson
-import com.noisyninja.androidlistpoc.layers.Utils
 import com.noisyninja.androidlistpoc.layers.network.NetworkModule
-import com.noisyninja.androidlistpoc.model.MeResponse
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import okhttp3.mockwebserver.MockResponse
+import org.junit.After
 import org.junit.Before
 import org.junit.Test
 import org.mockito.MockitoAnnotations
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
-import io.reactivex.schedulers.Schedulers
-import io.reactivex.android.plugins.RxAndroidPlugins
-import io.reactivex.plugins.RxJavaPlugins
-import com.noisyninja.androidlistpoc.layers.Utils.toJson
-import org.junit.After
 import java.io.IOException
 
 

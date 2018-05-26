@@ -1,6 +1,5 @@
 package com.noisyninja.androidlistpoc.layers.network
 
-import com.noisyninja.androidlistpoc.layers.Utils
 import com.noisyninja.androidlistpoc.model.MeResponse
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers

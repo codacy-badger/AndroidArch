@@ -2,13 +2,11 @@ package com.noisyninja.androidlistpoc.modules
 
 import android.content.Context
 import android.support.test.InstrumentationRegistry
-import android.support.test.espresso.intent.rule.IntentsTestRule
 import com.noisyninja.androidlistpoc.TestApplication
 import com.noisyninja.androidlistpoc.model.Me
 import com.noisyninja.androidlistpoc.model.Name
 import com.noisyninja.androidlistpoc.views.MainActivity
 import com.noisyninja.androidlistpoc.views.MainPresenter
-import org.junit.Rule
 
 
 open class Base {

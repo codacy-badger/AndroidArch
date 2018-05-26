@@ -4,11 +4,9 @@ import com.noisyninja.androidlistpoc.layers.di.NinjaComponent
 import com.noisyninja.androidlistpoc.model.Me
 import com.noisyninja.androidlistpoc.views.MainActivity
 import com.noisyninja.androidlistpoc.views.MainPresenter
-import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mock
-import org.mockito.Mockito.verify
 import org.mockito.MockitoAnnotations
 
 

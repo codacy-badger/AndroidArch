@@ -5,6 +5,7 @@ import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.DividerItemDecoration
+import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.LinearLayoutManager.VERTICAL
 import android.support.v7.widget.RecyclerView
 import android.view.View.GONE
@@ -20,7 +21,7 @@ import kotlinx.android.synthetic.main.content_main.*
 
 open class MainActivity : AppCompatActivity(), IMainActivity {
 
-    private var mResultList: ArrayList<ArrayList<Me>> = ArrayList()
+    private var mResultList: ArrayList<Me> = ArrayList()
     lateinit var mIMainPresenter: IMainPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,19 +37,11 @@ open class MainActivity : AppCompatActivity(), IMainActivity {
      * setup UI widgets
      */
     private fun setupList() {
-        val mLayoutManager = StickyHeaderGridLayoutManager(3)
-        mLayoutManager.setHeaderBottomOverlapMargin(resources.getDimensionPixelSize(R.dimen.text_margin))
 
+        val mLayoutManager = LinearLayoutManager(this)
         recyclerList.layoutManager = mLayoutManager
         recyclerList.adapter = MainAdapter(mResultList, mIMainPresenter)
         recyclerList.addItemDecoration(DividerItemDecoration(this, VERTICAL))
-        recyclerList.itemAnimator = object : DefaultItemAnimator() {
-            override fun animateRemove(holder: RecyclerView.ViewHolder): Boolean {
-                dispatchRemoveFinished(holder)
-                return false
-            }
-        }
-
         refresh_layout.setOnRefreshListener {
             mIMainPresenter.getList()
         }
@@ -59,9 +52,10 @@ open class MainActivity : AppCompatActivity(), IMainActivity {
             * can't handle notifydata when the data source change has different section and offsets
             */
             mIMainPresenter.reverseList(mResultList)
-            recyclerList.adapter = null //lose reference of last adapter to free memory
+            /*recyclerList.adapter = null //lose reference of last adapter to free memory
             recyclerList.adapter = MainAdapter(mResultList, mIMainPresenter)  //create new adapter to prevent notifydatasetchanged crash
-
+            */
+            recyclerList.adapter.notifyDataSetChanged()
             Snackbar.make(view, getString(R.string.reverse), Snackbar.LENGTH_LONG)
                     //.setAction("Action", null)
                     .show()
@@ -71,7 +65,7 @@ open class MainActivity : AppCompatActivity(), IMainActivity {
     /**
      * sets the list items once data is fetched from network/database
      */
-    override fun setList(result: ArrayList<ArrayList<Me>>) {
+    override fun setList(result: ArrayList<Me>) {
         mResultList.clear()
         mResultList.addAll(result)
         handleShowError(false, null)
@@ -88,11 +82,11 @@ open class MainActivity : AppCompatActivity(), IMainActivity {
 
             if (isError) {
                 recyclerList.visibility = GONE
-                recyclerText.visibility = VISIBLE
+                recyclerContainer.visibility = VISIBLE
                 recyclerText.text = t?.message
             } else {
                 recyclerList.visibility = VISIBLE
-                recyclerText.visibility = GONE
+                recyclerContainer.visibility = GONE
             }
         })
     }

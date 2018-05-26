@@ -3,7 +3,6 @@ package com.noisyninja.androidlistpoc.layers.network;
 import android.content.Context;
 
 import com.noisyninja.androidlistpoc.layers.UtilModule;
-import com.noisyninja.androidlistpoc.layers.Utils;
 
 import java.io.IOException;
 

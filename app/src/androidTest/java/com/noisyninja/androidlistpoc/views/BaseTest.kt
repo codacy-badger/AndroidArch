@@ -1,11 +1,5 @@
 package com.noisyninja.androidlistpoc.views
 
-import android.support.test.InstrumentationRegistry
-import com.noisyninja.androidlistpoc.TestApplication
-import com.noisyninja.androidlistpoc.layers.di.DaggerNinjaComponent
-import org.mockito.Mockito
-import java.time.Clock
-
 /**
  * Base test to hold common test code
  * Created by sudiptadutta on 18/05/18.

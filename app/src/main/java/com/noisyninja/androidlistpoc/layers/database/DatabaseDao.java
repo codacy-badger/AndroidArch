@@ -22,10 +22,10 @@ public interface DatabaseDao {
     @Query("SELECT * FROM me")
     LiveData<List<Me>> getAll();
 
-    /*
-        @Query("SELECT * FROM me where name LIKE  :name")
-        LiveData<Me> findById(Name name);
-        */
+
+    @Query("SELECT * FROM me where userId LIKE  :userId")
+    LiveData<Me> findById(int userId);
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(Me customer);
 

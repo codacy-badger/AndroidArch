@@ -8,6 +8,6 @@ import com.noisyninja.androidlistpoc.model.Me
  */
 interface IMainActivity {
 
-    fun setList(result: ArrayList<ArrayList<Me>>)
+    fun setList(result: ArrayList<Me>)
 
 }

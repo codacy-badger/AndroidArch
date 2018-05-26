@@ -61,7 +61,7 @@ class MainPresenter internal constructor(private val iMainActivity: IMainActivit
     /**
      * reverses list order
      */
-    override fun reverseList(arrayList: ArrayList<ArrayList<Me>>): ArrayList<ArrayList<Me>> {
+    override fun reverseList(arrayList: ArrayList<Me>): ArrayList<Me> {
         Collections.reverse(arrayList)
         return ArrayList(arrayList)
     }
@@ -75,36 +75,8 @@ class MainPresenter internal constructor(private val iMainActivity: IMainActivit
             iMainActivity.setList(ArrayList())
         } else {
             util.logI("got response")
-
-            val array: ArrayList<ArrayList<Me>> = makeGridLayoutReady(result)
-            //ninjaComponent.util().logI(ninjaComponent.util().toJson(array))
-            iMainActivity.setList(array)
+            iMainActivity.setList(ArrayList(result))
         }
     }
-
-    /**
-     * this creates a nested array of users for the gridlayout and sticky headers
-     */
-    fun makeGridLayoutReady(result: List<Me>): ArrayList<ArrayList<Me>> {
-        val array: ArrayList<ArrayList<Me>> = ArrayList()
-        var array2: ArrayList<Me> = ArrayList()
-        var counter = 0
-        var pageCount = 0
-        for (me: Me in result) {
-            me.page = pageCount
-            array2.add(me)
-            counter++
-            if (counter % 9 == 0) {
-                pageCount++
-                array.add(array2)
-                array2 = ArrayList()
-            }
-        }
-        if (array.size < counter) {//adding leftovers
-            array.add(array2)
-        }
-        return array
-    }
-
 
 }

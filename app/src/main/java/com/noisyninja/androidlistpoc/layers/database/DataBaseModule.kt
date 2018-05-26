@@ -5,7 +5,6 @@ import android.arch.persistence.room.Room
 import android.content.Context
 import com.noisyninja.androidlistpoc.BuildConfig
 import com.noisyninja.androidlistpoc.layers.UtilModule
-import com.noisyninja.androidlistpoc.layers.Utils
 import com.noisyninja.androidlistpoc.model.Me
 import io.reactivex.Completable
 import io.reactivex.CompletableObserver
@@ -24,8 +23,6 @@ open class DataBaseModule @Inject constructor(internal var mUtilModule: UtilModu
     internal var mDataBase: IDatabase
 
     init {
-
-        Utils.logI(this.javaClass, "DataBaseModule")
         mDataBase = Room.databaseBuilder(context,
                 IDatabase::class.java, BuildConfig.APP_DB)
                 //.allowMainThreadQueries() do not use!!
@@ -37,10 +34,6 @@ open class DataBaseModule @Inject constructor(internal var mUtilModule: UtilModu
         return mDataBase.databaseDao().all
     }
 
-    /*override fun findById(id: Int): LiveData<Me> {
-        return mDataBase.databaseDao().findById(id)
-    }*/
-
     override fun insert(me: Me?) {
         Completable.fromAction(object : Action {
             @Throws(Exception::class)
@@ -50,17 +43,21 @@ open class DataBaseModule @Inject constructor(internal var mUtilModule: UtilModu
             }
         }).observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io()).subscribe(object : CompletableObserver {
-            override fun onSubscribe(d: Disposable) {}
+                    override fun onSubscribe(d: Disposable) {}
 
-            override fun onComplete() {
-                mUtilModule.logI("inserting done")
-            }
+                    override fun onComplete() {
+                        mUtilModule.logI("inserting done")
+                    }
 
-            override fun onError(e: Throwable) {
-                mUtilModule.logI("delete error " + e.message)
-            }
-        })
+                    override fun onError(e: Throwable) {
+                        mUtilModule.logI("delete error " + e.message)
+                    }
+                })
 
+    }
+
+    override fun findById(userId: Int): LiveData<Me> {
+        return mDataBase.databaseDao().findById(userId)
     }
 
     override fun delete(me: Me?) {
@@ -72,16 +69,16 @@ open class DataBaseModule @Inject constructor(internal var mUtilModule: UtilModu
             }
         }).observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io()).subscribe(object : CompletableObserver {
-            override fun onSubscribe(d: Disposable) {}
+                    override fun onSubscribe(d: Disposable) {}
 
-            override fun onComplete() {
-                mUtilModule.logI("delete done")
-            }
+                    override fun onComplete() {
+                        mUtilModule.logI("delete done")
+                    }
 
-            override fun onError(e: Throwable) {
-                mUtilModule.logI("delete error " + e.message)
-            }
-        })
+                    override fun onError(e: Throwable) {
+                        mUtilModule.logI("delete error " + e.message)
+                    }
+                })
     }
 
     override fun insertAll(meList: List<Me>?) {
@@ -93,15 +90,15 @@ open class DataBaseModule @Inject constructor(internal var mUtilModule: UtilModu
             }
         }).observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io()).subscribe(object : CompletableObserver {
-            override fun onSubscribe(d: Disposable) {}
+                    override fun onSubscribe(d: Disposable) {}
 
-            override fun onComplete() {
-                mUtilModule.logI("insert done")
-            }
+                    override fun onComplete() {
+                        mUtilModule.logI("insert done")
+                    }
 
-            override fun onError(e: Throwable) {
-                mUtilModule.logI("delete error " + e.message)
-            }
-        })
+                    override fun onError(e: Throwable) {
+                        mUtilModule.logI("delete error " + e.message)
+                    }
+                })
     }
 }

@@ -28,4 +28,4 @@ android:
 #- chmod a+x gradle/wrapper/gradle-wrapper.jar
 
 script:
-  - ./gradlew assembleDebug  --stacktrace
+  - ./gradlew test  --stacktrace

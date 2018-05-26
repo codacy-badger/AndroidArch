@@ -1,14 +1,12 @@
 package com.noisyninja.androidlistpoc.layers.database.viewmodel
 
 import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModel
 import android.content.res.Resources
 import com.noisyninja.androidlistpoc.BuildConfig.NETSYNC_SEED_VALUE
 import com.noisyninja.androidlistpoc.BuildConfig.RESULT_COUNT
 import com.noisyninja.androidlistpoc.R
 import com.noisyninja.androidlistpoc.layers.UtilModule
-import com.noisyninja.androidlistpoc.layers.Utils
 import com.noisyninja.androidlistpoc.layers.database.DataBaseModule
 import com.noisyninja.androidlistpoc.layers.network.ICallback
 import com.noisyninja.androidlistpoc.layers.network.NetworkModule
@@ -36,7 +34,6 @@ open class MeViewModel @Inject constructor(val dataBaseModule: DataBaseModule,
     private val meLiveData: LiveData<List<Me>>
 
     init {
-        Utils.logI(this.javaClass, "MeViewModel")
         meLiveData = dataBaseModule.all
     }
 
@@ -45,10 +42,9 @@ open class MeViewModel @Inject constructor(val dataBaseModule: DataBaseModule,
     }
 
     fun getMe(): LiveData<List<Me>> {
-        Utils.logI(this.javaClass, "getMe")
 
         if (meLiveData.value == null || meLiveData.value!!.isEmpty() || meLiveData.value!!.size < 2) {
-            Utils.logI(this.javaClass, "getMe network")
+            utilModule.logI("getMe network")
             compositeDisposables
                     .add(networkModule
                             .getPeople(1, RESULT_COUNT.toInt(), NETSYNC_SEED_VALUE.toInt()).subscribe(
@@ -56,7 +52,7 @@ open class MeViewModel @Inject constructor(val dataBaseModule: DataBaseModule,
                                     { onError(it) }
                             ))
         } else {
-            Utils.logI(this.javaClass, "getMe database")
+            utilModule.logI("getMe database")
         }
 
         return meLiveData
@@ -73,13 +69,13 @@ open class MeViewModel @Inject constructor(val dataBaseModule: DataBaseModule,
 
     override fun onError(t: Throwable) {
         utilModule.logI("no response")
-
+        errorResponse.name.first = t.message
         dataBaseModule.insert(errorResponse)
         dispose()
     }
 
     private fun dispose() {
-        Utils.logI(this.javaClass, "disposing observable")
+        utilModule.logI("disposing observable")
         if (!compositeDisposables.isDisposed) {
             compositeDisposables.dispose()
         }

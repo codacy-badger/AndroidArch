@@ -9,5 +9,5 @@ import com.noisyninja.androidlistpoc.model.Me
 interface IMainPresenter {
     fun showDetail(me: Me)
     fun getList()
-    fun reverseList(arrayList: ArrayList<ArrayList<Me>>): ArrayList<ArrayList<Me>>
+    fun reverseList(arrayList: ArrayList<Me>): ArrayList<Me>
 }

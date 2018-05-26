@@ -1,19 +1,12 @@
 package com.noisyninja.androidlistpoc.modules
 
 import android.support.test.runner.AndroidJUnit4
-import com.noisyninja.androidlistpoc.BuildConfig
-import com.noisyninja.androidlistpoc.layers.network.*
+import com.noisyninja.androidlistpoc.layers.network.HttpClient
+import com.noisyninja.androidlistpoc.layers.network.ICallback
+import com.noisyninja.androidlistpoc.layers.network.NetworkModule
 import com.noisyninja.androidlistpoc.model.MeResponse
-import org.junit.Before
-import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.ArgumentMatchers.anyObject
 import org.mockito.Mock
-import org.mockito.Mockito
-import org.mockito.Mockito.any
-import org.mockito.Mockito.verify
-import org.mockito.MockitoAnnotations
-import retrofit2.Retrofit
 
 /**
  * Created by sudiptadutta on 23/05/18.

@@ -6,6 +6,6 @@
     <dimen name="image_margin">10dp</dimen>
     <dimen name="image_size">40dp</dimen>
     <dimen name="image_padding">4dp</dimen>
-    <dimen name="text_size1">12sp</dimen>
+    <dimen name="text_size1">18sp</dimen>
     <dimen name="text_size2">32sp</dimen>
 </resources>

@@ -3,7 +3,6 @@ package com.noisyninja.androidlistpoc.modules
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.Observer
 import android.arch.persistence.room.Room
-import android.support.test.InstrumentationRegistry
 import com.noisyninja.androidlistpoc.layers.database.IDatabase
 import io.reactivex.android.plugins.RxAndroidPlugins
 import io.reactivex.plugins.RxJavaPlugins

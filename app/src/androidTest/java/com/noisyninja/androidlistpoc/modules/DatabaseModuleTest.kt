@@ -1,8 +1,6 @@
 package com.noisyninja.androidlistpoc.modules
 
 import android.support.test.runner.AndroidJUnit4
-import com.noisyninja.androidlistpoc.model.Me
-import com.noisyninja.androidlistpoc.model.Name
 import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
