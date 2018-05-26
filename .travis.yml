@@ -20,6 +20,7 @@ android:
     - extra-google-m2repository
     - extra-android-m2repository
     - addon-google_apis-google-26
+    - extra-android-support
 
 #before_script:
 # - ./gradlew :app:assembleDebug
