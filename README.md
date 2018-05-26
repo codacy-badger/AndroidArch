@@ -1,5 +1,6 @@
 # AndroidArch
 [![Build Status](https://travis-ci.org/ir2pid/AndroidArch.svg?branch=master)](https://travis-ci.org/ir2pid/AndroidArch)
+[![codecov](https://codecov.io/gh/ir2pid/AndroidArch/branch/master/graph/badge.svg)](https://codecov.io/gh/ir2pid/AndroidArch)
 </br>
 A proof of concept for google's architecture components which uses REST api from randomuser.me/
 to fetch users and display in a master detail view
