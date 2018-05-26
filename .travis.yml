@@ -1,0 +1,30 @@
+language: android
+#jdk:
+#    - oraclejdk8
+#sudo: false
+#install: gradle wrapper --gradle-version 4.4
+
+android:
+  components:
+    - tools
+    - platform-tools
+
+    # The BuildTools version used by your project
+    - build-tools-26.0.3
+
+    # The SDK version used to compile your project
+    - android-26
+
+    # Additional components
+    - extra-google-google_play_services
+    - extra-google-m2repository
+    - extra-android-m2repository
+    - addon-google_apis-google-26
+
+before_script:
+# - ./gradlew :app:assembleDebug
+#- chmod a+x gradlew
+#- chmod a+x gradle/wrapper/gradle-wrapper.jar
+
+script:
+  - ./gradlew assembleDebug  --stacktrace

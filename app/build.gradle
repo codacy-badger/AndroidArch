@@ -1,0 +1,148 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+kapt {
+    generateStubs = true
+}
+
+android {
+
+    def CONFIG = { k -> "\"${project.properties.get(k)}\"" }
+
+    compileSdkVersion 26
+    defaultConfig {
+        applicationId "com.noisyninja.poc"
+        minSdkVersion 15
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "com.noisyninja.androidlistpoc.CustomTestRunner"
+
+        buildConfigField "String", "BASE_URL", CONFIG("base.url")
+        buildConfigField "String", "PAGE_URI", CONFIG("page.uri")
+        buildConfigField "String", "RESULTS_URI", CONFIG("results.uri")
+        buildConfigField "String", "RESULT_COUNT", CONFIG("count.uri")
+        buildConfigField "String", "API_URI", CONFIG("api.uri")
+        buildConfigField "String", "APP_DB", CONFIG("app.db")
+        buildConfigField "String", "CACHE_SIZE", CONFIG("cache.size")
+        buildConfigField "String", "NETSYNC_FLAG", CONFIG("netsync.flag")
+        buildConfigField "String", "NETSYNC_SEED", CONFIG("netsync.seed")
+        buildConfigField "String", "NETSYNC_SEED_VALUE", CONFIG("netsync.seed.value")
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+
+    dexOptions {
+        javaMaxHeapSize "2048M"
+    }
+
+    dataBinding {
+        enabled = true
+    }
+
+    kapt {
+        arguments { //saves room schema json to /schema dir
+            arg("room.schemaLocation", "$projectDir/schemas".toString())
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlinVersion"
+    implementation "com.android.support:appcompat-v7:$rootProject.supportLibraryVersion"
+    implementation "com.android.support:design:$rootProject.supportLibraryVersion"
+    implementation "com.android.support.constraint:constraint-layout:$rootProject.constraintLayoutVersion"
+    compile "com.android.support:recyclerview-v7:$rootProject.supportLibraryVersion"
+    compile "com.android.support:cardview-v7:$rootProject.supportLibraryVersion"
+
+    //sticky headers
+    compile "com.codewaves.stickyheadergrid:stickyheadergrid:$rootProject.stickyVersion"
+
+    //retrofit
+    compile "com.squareup.retrofit2:retrofit:$rootProject.retrofitVersion"
+    compile "com.squareup.retrofit2:adapter-rxjava2:$rootProject.retrofitVersion"
+    compile "com.squareup.retrofit2:converter-gson:$rootProject.gsonConverterVersion"
+
+    //okhttp
+    compile "com.squareup.okhttp3:logging-interceptor:$rootProject.okhttpVersion"
+    compile "com.squareup.okhttp3:okhttp:$rootProject.okhttpVersion"
+    //okhttp test
+    testCompile "com.squareup.okhttp3:mockwebserver:$rootProject.okhttpVersion"
+
+    // gson  picasso
+    compile "com.google.code.gson:gson:$rootProject.gsonVersion"
+    compile "com.squareup.picasso:picasso:$rootProject.picassoVersion"
+
+    //RxJava2
+    compile "io.reactivex.rxjava2:rxjava:$rootProject.rxjavaVersion"
+    compile "io.reactivex.rxjava2:rxandroid:$rootProject.rxandroidVersion"
+
+    //dagger2
+    compile "com.google.dagger:dagger:$rootProject.daggerVersion"
+    implementation "com.google.dagger:dagger-android-support:$rootProject.daggerVersion"
+    provided "javax.annotation:jsr250-api:$rootProject.javaXVersion"
+    kapt "com.google.dagger:dagger-compiler:$rootProject.daggerVersion"
+    kapt "com.google.dagger:dagger-android-processor:$rootProject.daggerVersion"
+    kaptAndroidTest "com.google.dagger:dagger-compiler:$rootProject.daggerVersion"
+
+    //databinding
+    kapt "com.android.databinding:compiler:$rootProject.dataBinding"
+
+    //room ORM
+    compile 'android.arch.persistence.room:runtime:' + rootProject.archRoomVersion
+    compile 'android.arch.persistence.room:rxjava2:' + rootProject.archRoomVersion
+    kapt 'android.arch.persistence.room:compiler:' + rootProject.archRoomVersion
+
+    //livedata datamodel licefycleobserver
+    implementation 'android.arch.lifecycle:extensions:' + rootProject.architectureVersion
+    kapt 'android.arch.lifecycle:compiler:' + rootProject.architectureVersion
+
+    //logging and leaks
+    implementation 'com.jakewharton.timber:timber:' + rootProject.timberVersion
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:' + rootProject.leakCanaryVersion
+    releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:' + rootProject.leakCanaryVersion
+
+    //test dependencies, junit, mockito, roboelectric, espresso
+    testImplementation "junit:junit:$rootProject.jUnitVersion"
+    testImplementation "org.mockito:mockito-all:$rootProject.mockitoVersion"
+    testImplementation "org.robolectric:robolectric:$rootProject.roboelectricVersion"
+    // required if you want to use Mockito for unit tests
+    testCompile "org.mockito:mockito-core:$rootProject.mockitoCoreVersion"
+    // required to test MutableLiveData instantly
+    testCompile "android.arch.core:core-testing:$rootProject.architectureVersion"
+    // to make mockito mock final classes
+    /*testCompile 'org.mockito:mockito-inline:2.13.0'
+    testCompile('com.nhaarman:mockito-kotlin:1.5.0') {
+        exclude group: 'org.jetbrains.kotlin'
+        exclude group: 'org.mockito'
+    }*/
+    //powermockito
+    //testCompile 'org.powermock:powermock-mockito-release-full:1.4.9'
+
+    // required if you want to use Mockito for Android tests
+    androidTestCompile "org.mockito:mockito-android:$rootProject.mockitoAndroidVersion"
+    androidTestImplementation "com.android.support.test:runner:$rootProject.testRunnerVersion"
+    androidTestCompile "com.android.support.test:runner:$rootProject.testRunnerVersion"
+    androidTestImplementation "com.android.support.test.espresso:espresso-core:$rootProject.espressoVersion"
+    androidTestCompile "com.android.support.test.espresso:espresso-core:$rootProject.espressoVersion"
+    androidTestCompile "com.android.support.test.espresso:espresso-intents:$rootProject.espressoVersion"
+    kaptAndroidTest "com.google.dagger:dagger-compiler:$rootProject.daggerVersion"
+
+    androidTestCompile("com.android.support.test.espresso:espresso-contrib:$rootProject.espressoContribVersion") {
+        exclude group: 'com.android.support', module: 'appcompat'
+        exclude group: 'com.android.support', module: 'support-v4'
+        exclude group: 'com.android.support', module: 'support-v7'
+        exclude group: 'com.android.support', module: 'design'
+        exclude module: 'support-annotations'
+        exclude module: 'recyclerview-v7'
+    }
+}
