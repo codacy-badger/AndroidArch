@@ -2,13 +2,13 @@
 
 buildscript {
     ext.kotlinVersion = '1.2.30'
-    ext.gradleToolVersion = '3.1.2'
+    ext.buildToolVersion = '3.0.1'
     repositories {
         google()
         jcenter()
     }
     dependencies {
-        classpath "com.android.tools.build:gradle:$gradleToolVersion"
+        classpath "com.android.tools.build:gradle:$buildToolVersion"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
 
         // NOTE: Do not place your application dependencies here; they belong
@@ -36,7 +36,7 @@ ext {
     archRoomVersion = "1.0.0"
     daggerVersion = "2.14.1"
     javaXVersion = "1.0"
-    dataBinding = "3.1.2"
+    dataBinding = "3.0.1"
     retrofitVersion = "2.3.0"
     gsonVersion = "2.8.1"
     gsonConverterVersion = "2.1.0"
