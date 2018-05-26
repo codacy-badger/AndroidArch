@@ -28,5 +28,9 @@ android:
 #- chmod a+x gradle/wrapper/gradle-wrapper.jar
 
 script:
-  - ./gradlew jacocoTestReport --stacktrace
+  - ./gradlew build jacocoTestReport assembleAndroidTest --stacktrace
+
+#upload code coverage to codecov.io
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
 
