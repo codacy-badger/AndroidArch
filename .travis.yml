@@ -28,4 +28,5 @@ android:
 #- chmod a+x gradle/wrapper/gradle-wrapper.jar
 
 script:
-  - ./gradlew test  --stacktrace
+  - ./gradlew jacocoTestReport --stacktrace
+
